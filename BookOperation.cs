@@ -111,6 +111,8 @@ namespace FinalProjectLibraryMSStefanoTurcarelli
                 Console.WriteLine($"Book ID: {pair.Key}, Title: {pair.Value[0]}, Author: {pair.Value[1]}, Genre: {pair.Value[3]}, Status: {pair.Value[4]}");
             }
 
+            Console.WriteLine("\nTotal: {0}", libraryDictionary.Count());
+
             Console.WriteLine("\n");
         }
 
@@ -221,73 +223,41 @@ namespace FinalProjectLibraryMSStefanoTurcarelli
                     break;
                 }
             }
-
-            //    if (int.TryParse(Console.ReadLine(), out bookID))
-            //    {
-            //        if (libraryDictionary.ContainsKey(bookID))
-            //        {
-            //            List<string> bookEntry = libraryDictionary[bookID];
-
-            //            // Check if the book is currently available
-            //            if (bookEntry[4] == "Available")
-            //            {
-            //                // Update the status to "Borrowed"
-            //                bookEntry[4] = "Borrowed";
-            //                Console.WriteLine("\nBook Borrowed successfully!\n");
-            //            }
-            //            else
-            //            {
-            //                Console.WriteLine("\nThis book is not available for Borrowing!\n");
-            //            }
-            //        }
-            //        else
-            //        {
-            //            Console.WriteLine("\nInvalid Book ID! No book found with the given ID!\n");
-            //        }
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("\nInvalid input! Please enter a valid Book ID!\n");
-            //    }
-            //}
-
-
-            // Return Books
-            //public void ReturnBook(Dictionary<int, List<string>> libraryDictionary)
-            //{
-            //    Console.WriteLine("\nType the Book ID you want to return:\n");
-
-            //    int bookID;
-
-            //    if (int.TryParse(Console.ReadLine(), out bookID))
-            //    {
-            //        if (libraryDictionary.ContainsKey(bookID))
-            //        {
-            //            List<string> bookEntry = libraryDictionary[bookID];
-
-            //            // Check if the book is currently available
-            //            if (bookEntry[4] == "Borrowed")
-            //            {
-            //                // Update the status to "Borrowed"
-            //                bookEntry[4] = "Available";
-            //                Console.WriteLine("\nBook Returned successfully!\n");
-            //            }
-            //            else
-            //            {
-            //                Console.WriteLine("\nThis book is not available for returning!\n");
-            //            }
-            //        }
-            //        else
-            //        {
-            //            Console.WriteLine("\nInvalid Book ID! No book found with the given ID!\n");
-            //        }
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("\nInvalid input! Please enter a valid Book ID!\n");
-            //    }
-            //}
-
         }
+
+        //Return Books
+        public void ReturnBook(Dictionary<int, List<string>> libraryDictionary)
+        {
+            int bookID;
+            bool inputIsValid = false;
+
+            while (inputIsValid == false)
+            {
+                Console.WriteLine("\nType the Book ID you want to Return:\n");
+                bookID = int.Parse(Console.ReadLine());
+
+                if (!libraryDictionary.ContainsKey(bookID))
+                {
+                    Console.WriteLine("\nInvalid Book ID! No book found with the given ID!\n");
+                    continue;
+                }
+
+                List<string> bookEntry = libraryDictionary[bookID];
+
+                if (bookEntry[4] == "Borrowed")
+                {
+                    bookEntry[4] = "Available";
+                    Console.WriteLine("\nBook Returned successfully!\n");
+                    break;
+                }
+                else if (bookEntry[4] == "Borrowed")
+                {
+                    Console.WriteLine("\nThis book is not available for Returning!\n");
+                    break;
+                }
+            }
+        }
+
     }
 }
+

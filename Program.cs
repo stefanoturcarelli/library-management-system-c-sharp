@@ -60,7 +60,7 @@ namespace FinalProjectLibraryMSStefanoTurcarelli
                             break;
                         case 5:
                             Console.WriteLine("\nReturn a Book\n");
-                            //bookOperation.ReturnBook(libraryDictionary);
+                            bookOperation.ReturnBook(libraryDictionary);
                             break;
 
                         default:
