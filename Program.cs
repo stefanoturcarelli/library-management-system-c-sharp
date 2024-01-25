@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace FinalProjectLibraryMSStefanoTurcarelli
 {
@@ -16,28 +12,30 @@ namespace FinalProjectLibraryMSStefanoTurcarelli
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            int createSampleBooks = 1;
+            // Initialization of variables and objects:
+            // ---------------------------------------
+            // exitApp is used to exit the application
+            // createSampleBooks is used to prevent the user from adding sample books more than once
+            // currentKey is used to assign Id dynamically
+            // menuChoice is used to store the user's input
+            // bookOperation object is used to call methods from BookOperation class
+            // libraryDictionary is used to store book entries
 
-            // Initialize currentKey outside of the method to assign Id dynamically
-            int currentKey = 9;
-
-            // Create bookOperation object to call methods from BookOperation class
-            BookOperation bookOperation = new BookOperation();
-
-            // Create Dictionary to store book entries
-            Dictionary<int, List<string>> libraryDictionary = new Dictionary<int, List<string>>();
-
-            int menuChoice = 0;
             bool exitApp = false;
+            int createSampleBooks = 1;
+            int currentKey = 9;
+            int menuChoice = 0;
+            BookOperation bookOperation = new BookOperation();
+            Dictionary<int, List<string>> libraryDictionary = new Dictionary<int, List<string>>();
 
             while (exitApp == false)
             {
+                // Display menu and prompt user for input
                 bookOperation.DisplayMenu();
 
                 try
                 {
                     menuChoice = int.Parse(Console.ReadLine());
-
                     switch (menuChoice)
                     {
                         case 0:
@@ -46,10 +44,12 @@ namespace FinalProjectLibraryMSStefanoTurcarelli
                             exitApp = true;
                             break;
                         case 1:
-                            // Pass currentKey by reference to recieve the updated value 
+                            // currentKey is passed by reference to AddBook method
+                            // so that it can be incremented and used as Id for the next book
                             bookOperation.AddBook(libraryDictionary, ref currentKey);
                             break;
                         case 2:
+                            // Display books in the library by genre or all books
                             bookOperation.ViewBooks(libraryDictionary);
                             break;
                         case 3:
@@ -63,9 +63,10 @@ namespace FinalProjectLibraryMSStefanoTurcarelli
                             break;
 
                         case 6:
+                            // Add sample books to the library for testing purposes
                             if (createSampleBooks == 1)
                             {
-                                // Add sample books to the library
+                                createSampleBooks = 0;
                                 libraryDictionary.Add(1, new List<string>() { "The Hobbit", "J.R.R. Tolkien", "1937", "fantasy", "Available" });
                                 libraryDictionary.Add(2, new List<string>() { "The Lord of the Rings", "J.R.R. Tolkien", "1954", "fantasy", "Available" });
                                 libraryDictionary.Add(3, new List<string>() { "The Silmarillion", "J.R.R. Tolkien", "1977", "fantasy", "Available" });
@@ -75,24 +76,17 @@ namespace FinalProjectLibraryMSStefanoTurcarelli
                                 libraryDictionary.Add(7, new List<string>() { "The Adventures of Tom Sawyer", "Mark Twain", "1876", "fiction", "Available" });
                                 libraryDictionary.Add(8, new List<string>() { "Hamlet", "William Shakespeare", "1603", "drama", "Available" });
                                 libraryDictionary.Add(9, new List<string>() { "Romeo and Juliet", "William Shakespeare", "1597", "drama", "Available" });
-
-                                createSampleBooks = 0;
                             }
                             else
                             {
                                 Console.Clear();
-
                                 Console.WriteLine("\nSample books have already been added to the library\n");
-
                                 Thread.Sleep(1500);
-
                                 Console.Clear();
-
                                 break;
                             }
 
                             Console.WriteLine("\nSample books have been added to the library\n");
-
                             break;
 
                         default:
