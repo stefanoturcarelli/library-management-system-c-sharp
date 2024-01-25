@@ -6,6 +6,13 @@ using System.Threading;
 
 namespace FinalProjectLibraryMSStefanoTurcarelli
 {
+    /// <summary>
+    /// The Data Strucures used in this project are:
+    /// 1. Dictionary
+    /// 2. List
+    /// 3. Array
+    /// 
+    /// </summary>
     public class BookOperation
     {
         /// <summary>
@@ -153,7 +160,6 @@ namespace FinalProjectLibraryMSStefanoTurcarelli
                             // Check if the genre exists in the list
                             if (uniqueGenresList.Contains(selectedGenre))
                             {
-                                Console.Clear();
                                 DisplayBooksByGenre(libraryDictionary, selectedGenre);
                             }
                             else
